@@ -9,7 +9,7 @@ import (
 )
 
 type Mux struct {
-	Mux *http.ServeMux
+	ServerMux *http.ServeMux
 	app *http.Server
 }
 
@@ -29,17 +29,18 @@ func (m Mux) quit() {
 
 func DefineApp() Mux {
 	var mux Mux
-	mux.Mux = http.NewServeMux()
+	mux.ServerMux = http.NewServeMux()
 	mux.quit()
 	return mux
 }
 
 func (m *Mux) Start(addr string) {
+
 	// 配置服务基础信息 后面通过config直接导入进来
 	m.app = &http.Server{
 		Addr:         addr,
 		WriteTimeout: time.Second * 3,
-		Handler:      m.Mux,
+		Handler:      m.ServerMux,
 	}
 
 	if err := m.app.ListenAndServe(); err != nil {

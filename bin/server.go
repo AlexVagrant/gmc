@@ -8,7 +8,8 @@ import (
 
 func main() {
 	mux := gmc.DefineApp()
-	mux.Mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+  // 这里应该设置router方法
+	mux.ServerMux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("hello"))
 	})
 	mux.Start(":8001")
