@@ -1,0 +1,2 @@
+# gmc
+golang magic framework
